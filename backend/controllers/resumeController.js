@@ -2,6 +2,7 @@ import fs from "fs";
 import pdfParse from "pdf-parse/lib/pdf-parse.js";
 import Resume from "../models/Resume.js";
 import { GoogleGenAI } from "@google/genai";
+import { ATS_PROMPT } from "../utils/prompts.js";
 
 export const analyzeResume = async (req, res) => {
   try {
@@ -35,25 +36,7 @@ export const analyzeResume = async (req, res) => {
       apiKey: process.env.GEMINI_API_KEY,
     });
 
-    const prompt = `
-You are an expert ATS Resume Analyzer.
-
-Analyze the following resume.
-
-Return ONLY valid JSON in this format:
-
-{
-  "atsScore": 0,
-  "skills": [],
-  "missingSkills": [],
-  "strengths": [],
-  "suggestions": []
-}
-
-Resume:
-
-${resumeText}
-`;
+    const prompt = ATS_PROMPT(resumeText);
 
     const response = await ai.models.generateContent({
       model: "gemini-flash-latest",

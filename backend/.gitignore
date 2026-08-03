@@ -1,2 +1,17 @@
+# Dependencies
 node_modules/
+
+# Environment Variables
 .env
+
+# Uploaded Resume Files
+uploads/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# OS Files
+.DS_Store
+Thumbs.db

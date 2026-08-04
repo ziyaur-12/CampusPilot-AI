@@ -1,6 +1,9 @@
+import { useState } from "react";
 import ResumeUploadCard from "../../components/dashboard/ResumeUploadCard";
+import JobDescriptionCard from "../../components/dashboard/JobDescriptionCard";
 
 function ResumeAnalyzer() {
+  const [uploadedResume, setUploadedResume] = useState(null);
   return (
     <div className="space-y-6">
       {/* Page Header */}
@@ -15,20 +18,15 @@ function ResumeAnalyzer() {
         </p>
       </div>
 
-      {/* Upload Card */}
-      <ResumeUploadCard />
+     {/* Resume Upload */}
+     <ResumeUploadCard
+  onResumeUploaded={setUploadedResume}
+/>
 
-      {/* Results Placeholder */}
-      <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center shadow-sm">
-        <h2 className="text-2xl font-semibold text-slate-700">
-          AI Analysis Results
-        </h2>
-
-        <p className="mt-3 text-slate-500">
-          Upload a resume to generate ATS Score, Skills,
-          Missing Keywords and AI Suggestions.
-        </p>
-      </div>
+     {/* Job Description Match */}
+     <JobDescriptionCard
+  uploadedResume={uploadedResume}
+/>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import DashboardLayout from "../../layouts/DashboardLayout";
 import StatCard from "../../components/dashboard/StatCard";
 import ResumeUploadCard from "../../components/dashboard/ResumeUploadCard";
+import JobDescriptionCard from "../../components/dashboard/JobDescriptionCard";
 
 function DashboardHome() {
   return (
@@ -78,7 +79,10 @@ function DashboardHome() {
         </div>
 
       </div>
-      <ResumeUploadCard />
+      <div className="mt-8 grid gap-6 lg:grid-cols-2">
+  <ResumeUploadCard />
+  <JobDescriptionCard />
+</div>
     </DashboardLayout>
   );
 }

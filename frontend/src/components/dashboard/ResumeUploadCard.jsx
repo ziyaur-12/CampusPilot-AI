@@ -5,7 +5,7 @@ import {
 import { useState } from "react";
 import { UploadCloud, FileText } from "lucide-react";
 
-function ResumeUploadCard() {
+function ResumeUploadCard({ onResumeUploaded }) {
   const [file, setFile] = useState(null);
   const [uploadedResume, setUploadedResume] = useState(null);
   const [analysis, setAnalysis] = useState(null);
@@ -38,8 +38,11 @@ function ResumeUploadCard() {
 
     setUploadedResume(res.data.resume);
 
-    console.log(res.data);
+if (onResumeUploaded) {
+  onResumeUploaded(res.data.resume);
+}
 
+console.log(res.data);
   } catch (error) {
     alert(
       error.response?.data?.message ||

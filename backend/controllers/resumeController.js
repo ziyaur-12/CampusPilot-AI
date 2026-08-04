@@ -44,16 +44,28 @@ export const analyzeResume = async (req, res) => {
     });
 
     const cleanedResponse = response.text
-  .replace(/```json/g, "")
-  .replace(/```/g, "")
-  .trim();
+      .replace(/```json/g, "")
+      .replace(/```/g, "")
+      .trim();
 
-const analysis = JSON.parse(cleanedResponse);
+    const analysis = JSON.parse(cleanedResponse);
+
+    // Save analysis in MongoDB
+    resume.analysis = {
+      atsScore: analysis.atsScore,
+      skills: analysis.skills,
+      missingSkills: analysis.missingSkills,
+      strengths: analysis.strengths,
+      suggestions: analysis.suggestions,
+      analyzedAt: new Date(),
+    };
+
+    await resume.save();
 
     res.status(200).json({
-  success: true,
-  analysis,
-});
+      success: true,
+      analysis,
+    });
 
   } catch (error) {
     console.error(error);

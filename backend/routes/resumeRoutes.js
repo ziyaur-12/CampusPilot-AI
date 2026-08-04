@@ -1,11 +1,20 @@
-import { analyzeResume } from "../controllers/resumeController.js";
 import express from "express";
 import upload from "../middleware/uploadMiddleware.js";
 import Resume from "../models/Resume.js";
 import protect from "../middleware/authMiddleware.js";
 
+import {
+  analyzeResume,
+  matchResume,
+} from "../controllers/resumeController.js";
+
 const router = express.Router();
 
+/*
+=========================================
+Upload Resume
+=========================================
+*/
 router.post(
   "/upload",
   protect,
@@ -30,9 +39,8 @@ router.post(
         message: "Resume Uploaded Successfully 🚀",
         resume,
       });
-
     } catch (error) {
-      console.log(error);
+      console.error(error);
 
       res.status(500).json({
         success: false,
@@ -41,10 +49,27 @@ router.post(
     }
   }
 );
+
+/*
+=========================================
+Analyze Resume
+=========================================
+*/
 router.post(
   "/analyze",
   protect,
   analyzeResume
+);
+
+/*
+=========================================
+Match Resume With Job Description
+=========================================
+*/
+router.post(
+  "/match",
+  protect,
+  matchResume
 );
 
 export default router;

@@ -1,25 +1,42 @@
 export const ATS_PROMPT = (resumeText) => `
-You are an expert ATS Resume Analyzer.
+You are an ATS Resume Analyzer.
 
 Analyze the following resume.
 
-Return ONLY valid JSON in the following format.
+Resume:
+
+${resumeText}
+
+Return ONLY valid JSON in this format:
 
 {
-  "atsScore": 0,
+  "atsScore": 85,
   "skills": [],
   "missingSkills": [],
   "strengths": [],
   "suggestions": []
 }
+`;
 
-Rules:
-- Return only valid JSON.
-- Do not add markdown.
-- Do not use \`\`\`json.
-- ATS score should be between 0 and 100.
+export const JOB_MATCH_PROMPT = (resumeText, jobDescription) => `
+You are an expert ATS Resume Matcher.
+
+Compare the resume with the following Job Description.
 
 Resume:
 
 ${resumeText}
+
+Job Description:
+
+${jobDescription}
+
+Return ONLY valid JSON.
+
+{
+  "matchScore": 90,
+  "matchedSkills": [],
+  "missingSkills": [],
+  "recommendations": []
+}
 `;

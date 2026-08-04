@@ -10,7 +10,7 @@ import authRoutes from "./routes/authRoutes.js";
 
 dotenv.config();
 
-console.log("SERVER KEY =", process.env.GEMINI_API_KEY);
+console.log("GROQ KEY =", process.env.GROQ_API_KEY);
 
 connectDB();
 

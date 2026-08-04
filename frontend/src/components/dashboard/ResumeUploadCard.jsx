@@ -185,48 +185,140 @@ const handleAnalyze = async () => {
 )}
 
 {analysis && (
-  <div className="mt-6 rounded-xl border border-slate-200 bg-slate-50 p-6">
+  <div className="mt-8 space-y-6">
 
-    <h2 className="mb-4 text-2xl font-bold">
-      AI Analysis Result
-    </h2>
+    {/* ATS Score */}
+    <div className="rounded-2xl bg-gradient-to-r from-violet-600 to-purple-700 p-8 text-center text-white shadow-lg">
 
-    <p className="mb-4">
-      <span className="font-bold">ATS Score:</span>{" "}
-      {analysis.atsScore}%
-    </p>
+      <h2 className="text-3xl font-bold">
+        ATS Resume Score
+      </h2>
 
-    <h3 className="font-bold">Skills</h3>
+      <div className="mt-6 flex justify-center">
 
-    <ul className="mb-4 list-disc pl-6">
-      {analysis.skills.map((skill, index) => (
-        <li key={index}>{skill}</li>
-      ))}
-    </ul>
+        <div className="flex h-40 w-40 items-center justify-center rounded-full border-[10px] border-white text-5xl font-bold">
 
-    <h3 className="font-bold">Missing Skills</h3>
+          {analysis.atsScore}%
 
-    <ul className="mb-4 list-disc pl-6">
-      {analysis.missingSkills.map((skill, index) => (
-        <li key={index}>{skill}</li>
-      ))}
-    </ul>
+        </div>
 
-    <h3 className="font-bold">Strengths</h3>
+      </div>
 
-    <ul className="mb-4 list-disc pl-6">
-      {analysis.strengths.map((item, index) => (
-        <li key={index}>{item}</li>
-      ))}
-    </ul>
+      <p className="mt-4 text-lg">
 
-    <h3 className="font-bold">Suggestions</h3>
+        {analysis.atsScore >= 80
+          ? "Excellent Resume 🚀"
+          : analysis.atsScore >= 60
+          ? "Good Resume 👍"
+          : "Needs Improvement"}
 
-    <ul className="list-disc pl-6">
-      {analysis.suggestions.map((item, index) => (
-        <li key={index}>{item}</li>
-      ))}
-    </ul>
+      </p>
+
+    </div>
+
+    {/* Skills */}
+
+    <div className="rounded-2xl bg-white p-6 shadow">
+
+      <h2 className="mb-4 text-2xl font-bold">
+        Skills
+      </h2>
+
+      <div className="flex flex-wrap gap-3">
+
+        {analysis.skills.map((skill, index) => (
+
+          <span
+            key={index}
+            className="rounded-full bg-violet-100 px-4 py-2 text-sm font-semibold text-violet-700"
+          >
+            {skill}
+          </span>
+
+        ))}
+
+      </div>
+
+    </div>
+
+    {/* Missing Skills */}
+
+    <div className="rounded-2xl bg-white p-6 shadow">
+
+      <h2 className="mb-4 text-2xl font-bold text-red-600">
+        Missing Skills
+      </h2>
+
+      <div className="flex flex-wrap gap-3">
+
+        {analysis.missingSkills.map((skill, index) => (
+
+          <span
+            key={index}
+            className="rounded-full bg-red-100 px-4 py-2 text-sm font-semibold text-red-600"
+          >
+            {skill}
+          </span>
+
+        ))}
+
+      </div>
+
+    </div>
+
+    {/* Strengths */}
+
+<div className="rounded-2xl bg-white p-6 shadow">
+
+  <h2 className="mb-5 text-2xl font-bold text-green-600">
+    💪 Strengths
+  </h2>
+
+  <div className="grid gap-4 md:grid-cols-2">
+
+    {analysis.strengths.map((item, index) => (
+
+      <div
+        key={index}
+        className="rounded-xl border border-green-200 bg-green-50 p-4"
+      >
+        <p className="font-medium text-slate-700">
+          ✅ {item}
+        </p>
+      </div>
+
+    ))}
+
+  </div>
+
+</div>
+
+    {/* Suggestions */}
+
+<div className="rounded-2xl bg-white p-6 shadow">
+
+  <h2 className="mb-5 text-2xl font-bold text-orange-600">
+    💡 AI Suggestions
+  </h2>
+
+  <div className="grid gap-4">
+
+    {analysis.suggestions.map((item, index) => (
+
+      <div
+        key={index}
+        className="rounded-xl border border-orange-200 bg-orange-50 p-4 transition hover:shadow-md"
+      >
+        <p className="font-medium text-slate-700">
+          {item}
+        </p>
+      </div>
+
+    ))}
+
+  </div>
+
+</div>
 
   </div>
 )}

@@ -49,6 +49,18 @@ const resumeSchema = new mongoose.Schema(
     default: null,
   },
 },
+
+jobMatch: {
+  matchScore: Number,
+
+  matchedSkills: [String],
+
+  missingSkills: [String],
+
+  recommendations: [String],
+
+  analyzedAt: Date,
+},
   },
   {
     timestamps: true,
